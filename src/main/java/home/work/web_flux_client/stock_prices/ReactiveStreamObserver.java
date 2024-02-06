@@ -29,14 +29,13 @@ public abstract class ReactiveStreamObserver<T, S> implements StreamObserver<S> 
         sink.tryEmitComplete();
     }
 
-    public <R> Flux<T> observe(R request, BiConsumer<R, StreamObserver<S>> consumer) {
+    public <R> Flux<T> observe(R request, BiConsumer<R, StreamObserver<S>> rpc) {
         var context = Context.current().fork().withCancellation();
-        context.run(() -> consumer.accept(request, this));
-        return sink
-                .asFlux()
-                .doFinally(signalType -> context.cancel(
-                        new RuntimeException("Context closed by " + signalType.name())
-                ));
+        context.run(() -> rpc.accept(request, this));
+
+        return sink.asFlux().doFinally(signalType -> context.cancel(
+                new RuntimeException("Context closed by " + signalType.name())
+        ));
     }
 
     public abstract T process(S value);
