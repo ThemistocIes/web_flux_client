@@ -1,0 +1,18 @@
+syntax = "proto3";
+option java_multiple_files = true;
+package home.work.web_flux_client;
+
+import "google/protobuf/empty.proto";
+
+message StockPriceRequest {
+  string symbol = 1;
+}
+
+message StockPriceResponse {
+  string symbol = 1;
+  double price = 2;
+}
+
+service StockPriceService {
+  rpc GetPrice(StockPriceRequest) returns (stream StockPriceResponse);
+}
