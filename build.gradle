@@ -5,8 +5,8 @@ plugins {
 	id 'com.google.protobuf' version '0.9.4'
 }
 
-group = 'home.work'
-version = '0.0.1'
+group = 'home.work.stock_prices'
+version = '0.0.2'
 
 java {
 	sourceCompatibility = '21'
