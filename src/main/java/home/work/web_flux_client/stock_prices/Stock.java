@@ -1,12 +1,12 @@
 package home.work.web_flux_client.stock_prices;
 
-import home.work.web_flux_client.StockPriceRequest;
-import home.work.web_flux_client.StockPriceResponse;
-import home.work.web_flux_client.StockPriceServiceGrpc;
+import home.work.grpc_server.StockPriceRequest;
+import home.work.grpc_server.StockPriceResponse;
+import home.work.grpc_server.StockPriceServiceGrpc;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
+import net.devh.boot.grpc.server.service.GrpcService;
 import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Flux;
@@ -14,7 +14,7 @@ import reactor.core.publisher.Flux;
 import static org.springframework.web.reactive.function.server.RequestPredicates.GET;
 import static org.springframework.web.reactive.function.server.RouterFunctions.route;
 
-@Service
+@GrpcService
 public class Stock {
     private final ManagedChannel channel = ManagedChannelBuilder
             .forAddress("localhost", 8080)
