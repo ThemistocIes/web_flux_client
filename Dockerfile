@@ -1,5 +1,4 @@
-FROM openjdk:21
+FROM openjdk:21-jdk-alpine
 WORKDIR /stockPricesApp
-CMD ["./gradlew", "clean", "bootJar"]
-COPY build/libs/*.jar app.jar
-EXPOSE 8050
+COPY build/libs/web_flux_client-0.0.2.jar app.jar
+ENTRYPOINT ["java","-jar","/web_flux_client-0.0.2.jar"]
