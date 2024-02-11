@@ -19,7 +19,7 @@ import static org.springframework.web.reactive.function.server.RouterFunctions.r
 public class Stock {
     @GrpcClient("web-flux-client-stock-prices")
     private final ManagedChannel channel = ManagedChannelBuilder
-            .forAddress("localhost", 8050)
+            .forAddress("0.0.0.0",8050)
             .usePlaintext()
             .build();
     private final StockPriceServiceGrpc.StockPriceServiceStub stub = StockPriceServiceGrpc.newStub(channel);
